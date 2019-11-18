@@ -7,22 +7,22 @@ from django.contrib.auth.models import User
 from .models import Profile, Image, Comment, Like, Follow
 from .forms import ImagePostForm, CommentForm, ProfileForm
 
-# from wsgiref.util import FileWrapper
-# import mimetypes
-# from django.conf import settings
-# import os
+from wsgiref.util import FileWrapper
+import mimetypes
+from django.conf import settings
+import os
 
-# # Create your views here.
+# Create your views here.
 
-# def base(request):
-#     return render(request, 'base.html')
+def base(request):
+    return render(request, 'base.html')
 
 
-# def explore(request):
-#     '''
-#     Views the initial profile
-#     '''
-#     return render(request, 'explore.html')
+def explore(request):
+    '''
+    Views the initial profile
+    '''
+    return render(request, 'explore.html')
 
 
 # @login_required(login_url='/accounts/login')
