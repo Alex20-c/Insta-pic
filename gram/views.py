@@ -116,63 +116,63 @@ def profile(request):
 
         pics = Image.objects.filter(user=request.user.id).all()
 
-#     except:
+    except:
 
-#         title = f'{current_user.username}'
+        title = f'{current_user.username}'
 
-#         pics = Image.objects.filter(user=request.user.id).all()
+        pics = Image.objects.filter(user=request.user.id).all()
 
-#         info = Profile.objects.filter(user=7)
+        info = Profile.objects.filter(user=7)
 
-#     return render(request, 'my-profile.html', {"title": title, "current_user": current_user, "info": info, "pics": pics})
-
-
-# @login_required(login_url='/accounts/login')
-# def other_profile(request, prof_id):
-#     '''
-#     View function to display a profile information of other users
-#     '''
-#     current_user = request.user
-
-#     try:
-
-#         info = Profile.objects.filter(id=prof_id)
-
-#         follow_profile = Profile.objects.get(id=prof_id)
-
-#         check_if_following = Follow.objects.filter(
-#             user=current_user, profile=follow_profile).count()
-
-#         pics = Image.objects.all().filter(user_id=prof_id)
-#         nbr = pics.count()
-
-#         title = f'{request.user.username}\'s'
-
-#     except ObjectDoesNotExist:
-#         raise Http404()
-
-#     return render(request, 'other-profile.html', {"title": title, "nbr": nbr, "current_user": current_user, "info": info, "pics": pics, "check_if_following": check_if_following})
+    return render(request, 'my-profile.html', {"title": title, "current_user": current_user, "info": info, "pics": pics})
 
 
-# @login_required(login_url='/accounts/login')
-# def new_post(request):
-#     '''
-#     View function to display a form for creating a post to a logged in authenticated user
-#     '''
-#     current_user = request.user
+@login_required(login_url='/accounts/login')
+def other_profile(request, prof_id):
+    '''
+    View function to display a profile information of other users
+    '''
+    current_user = request.user
 
-#     if request.method == 'POST':
+    try:
 
-#         form = ImagePostForm(request.POST, request.FILES)
+        info = Profile.objects.filter(id=prof_id)
 
-#         if form.is_valid:
-#             post = form.save(commit=False)
-#             post.user = current_user
-#             post.save()
-#             return redirect(profile)
-#     else:
-#         form = ImagePostForm()
-#     return render(request, 'new-post.html', {"form": form})
+        follow_profile = Profile.objects.get(id=prof_id)
+
+        check_if_following = Follow.objects.filter(
+            user=current_user, profile=follow_profile).count()
+
+        pics = Image.objects.all().filter(user_id=prof_id)
+        nbr = pics.count()
+
+        title = f'{request.user.username}\'s'
+
+    except ObjectDoesNotExist:
+        raise Http404()
+
+    return render(request, 'other-profile.html', {"title": title, "nbr": nbr, "current_user": current_user, "info": info, "pics": pics, "check_if_following": check_if_following})
+
+
+@login_required(login_url='/accounts/login')
+def new_post(request):
+    '''
+    View function to display a form for creating a post to a logged in authenticated user
+    '''
+    current_user = request.user
+
+    if request.method == 'POST':
+
+        form = ImagePostForm(request.POST, request.FILES)
+
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.user = current_user
+            post.save()
+            return redirect(profile)
+    else:
+        form = ImagePostForm()
+    return render(request, 'new-post.html', {"form": form})
 
 
 # @login_required(login_url='/accounts/login')
