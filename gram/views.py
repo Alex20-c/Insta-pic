@@ -75,46 +75,46 @@ def single_image(request, photo_id):
     return render(request, 'single-image.html', {'image': image, "user_info": user_info, "comments": comments, "likes": likes, "validate_vote": validate_vote})
 
 
-# @login_required(login_url='/accounts/login')
-# def manage_image(request, photo_id):
-#     '''
-#     View funtion to display a particular image with its details
-#     '''
-#     image = Image.objects.get(id=photo_id)
-#     user_info = Profile.objects.get(user=image.user.id)
-#     comments = Comment.objects.filter(post=image.id)
-#     validate_vote = Like.objects.filter(user=request.user, post=photo_id).count()
-#     upvotes = Like.get_post_likes(image.id)
-#     likes = len(upvotes)
-#     return render(request, 'manage-image.html', {'image': image, "user_info": user_info, "comments": comments, "likes": likes, "validate_vote": validate_vote})
+@login_required(login_url='/accounts/login')
+def manage_image(request, photo_id):
+    '''
+    View funtion to display a particular image with its details
+    '''
+    image = Image.objects.get(id=photo_id)
+    user_info = Profile.objects.get(user=image.user.id)
+    comments = Comment.objects.filter(post=image.id)
+    validate_vote = Like.objects.filter(user=request.user, post=photo_id).count()
+    upvotes = Like.get_post_likes(image.id)
+    likes = len(upvotes)
+    return render(request, 'manage-image.html', {'image': image, "user_info": user_info, "comments": comments, "likes": likes, "validate_vote": validate_vote})
 
 
-# @login_required(login_url='/accounts/login')
-# def delete_post(request, image_id):
-#     '''
-#     View function to delete an image post
-#     '''
-#     remove = Image.objects.get(id=image_id)
-#     remove.delete()
-#     return redirect(index)
+@login_required(login_url='/accounts/login')
+def delete_post(request, image_id):
+    '''
+    View function to delete an image post
+    '''
+    remove = Image.objects.get(id=image_id)
+    remove.delete()
+    return redirect(index)
 
 
-# @login_required(login_url='/accounts/login')
-# def profile(request):
-#     '''
-#     View function to display the profile of the logged in user when they click on the user icon
-#     '''
-#     current_user = request.user  # get the id of the current
+@login_required(login_url='/accounts/login')
+def profile(request):
+    '''
+    View function to display the profile of the logged in user when they click on the user icon
+    '''
+    current_user = request.user  # get the id of the current
 
-#     try:
+    try:
 
-#         single_profile = Profile.objects.get(user=current_user.id)
+        single_profile = Profile.objects.get(user=current_user.id)
 
-#         title = f'{current_user.username}\'s'
+        title = f'{current_user.username}\'s'
 
-#         info = Profile.objects.filter(user=current_user)
+        info = Profile.objects.filter(user=current_user)
 
-#         pics = Image.objects.filter(user=request.user.id).all()
+        pics = Image.objects.filter(user=request.user.id).all()
 
 #     except:
 
