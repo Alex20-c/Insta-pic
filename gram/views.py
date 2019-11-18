@@ -175,53 +175,53 @@ def new_post(request):
     return render(request, 'new-post.html', {"form": form})
 
 
-# @login_required(login_url='/accounts/login')
-# def create_profile(request):
-#     '''
-#     View function to create and update the profile of the user
-#     '''
-#     current_user = request.user
+@login_required(login_url='/accounts/login')
+def create_profile(request):
+    '''
+    View function to create and update the profile of the user
+    '''
+    current_user = request.user
 
-#     profiles = Profile.objects.filter(user=current_user).count()
+    profiles = Profile.objects.filter(user=current_user).count()
 
-#     if request.method == 'POST':
+    if request.method == 'POST':
 
-#         form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES)
 
-#         if form.is_valid:
+        if form.is_valid:
 
-#             if profiles == 0:
-#                 k = form.save(commit=False)
-#                 k.user = current_user
-#                 k.save()
-#                 return redirect(profile)
-#             else:
-#                 record = Profile.objects.filter(user=current_user)
-#                 record.delete()
-#                 k = form.save(commit=False)
-#                 k.user = current_user
-#                 k.save()
-#                 return redirect(profile)
-#     else:
-#         form = ProfileForm()
-#     return render(request, 'update-profile.html', {"form": form})
+            if profiles == 0:
+                k = form.save(commit=False)
+                k.user = current_user
+                k.save()
+                return redirect(profile)
+            else:
+                record = Profile.objects.filter(user=current_user)
+                record.delete()
+                k = form.save(commit=False)
+                k.user = current_user
+                k.save()
+                return redirect(profile)
+    else:
+        form = ProfileForm()
+    return render(request, 'update-profile.html', {"form": form})
 
 
-# @login_required(login_url='/accounts/login/')
-# def new_comment(request, image_id):
-#     current_image = Image.objects.get(id=image_id)
-#     current_user = request.user
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.user = current_user
-#             comment.post = current_image
-#             comment.save()
-#         return redirect(single_image, current_image.id)
-#     else:
-#         form = CommentForm()
-#     return render(request, 'new-comment.html', {"form": form, "current_image": current_image})
+@login_required(login_url='/accounts/login/')
+def new_comment(request, image_id):
+    current_image = Image.objects.get(id=image_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = current_user
+            comment.post = current_image
+            comment.save()
+        return redirect(single_image, current_image.id)
+    else:
+        form = CommentForm()
+    return render(request, 'new-comment.html', {"form": form, "current_image": current_image})
 
 
 # @login_required(login_url='/accounts/login')
