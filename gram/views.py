@@ -224,87 +224,87 @@ def new_comment(request, image_id):
     return render(request, 'new-comment.html', {"form": form, "current_image": current_image})
 
 
-# @login_required(login_url='/accounts/login')
-# def like(request, id):
-#     '''
-#     View function add a like to a post the current user has liked
-#     '''
-#     current_user = request.user  # argument must be a string, a bytes-like object or a number, not 'Profile'
+@login_required(login_url='/accounts/login')
+def like(request, id):
+    '''
+    View function add a like to a post the current user has liked
+    '''
+    current_user = request.user  # argument must be a string, a bytes-like object or a number, not 'Profile'
 
-#     current_image = Image.objects.get(id=id)
+    current_image = Image.objects.get(id=id)
 
-#     validate_vote = Like.objects.filter(
-#         user=current_user, post=current_image).count()
+    validate_vote = Like.objects.filter(
+        user=current_user, post=current_image).count()
 
-#     if validate_vote == 0:
+    if validate_vote == 0:
 
-#         like = Like(user=current_user, post=current_image, likes_number=int(1))
-#         like.save()
+        like = Like(user=current_user, post=current_image, likes_number=int(1))
+        like.save()
 
-#     else:
-#         remove_like = Like.objects.filter(
-#             user=current_user, post=current_image)
-#         remove_like.delete()
+    else:
+        remove_like = Like.objects.filter(
+            user=current_user, post=current_image)
+        remove_like.delete()
 
-#     return redirect(single_image, current_image.id)
-
-
-# @login_required(login_url='/accounts/login')
-# def follow(request, id):
-#     '''
-#     View function add frofiles of other users to your timeline
-#     '''
-#     current_user = request.user
-
-#     follow_profile = Profile.objects.get(id=id)
-
-#     check_if_following = Follow.objects.filter(
-#         user=current_user, profile=follow_profile).count()
-
-#     if check_if_following == 0:
-
-#         following = Follow(user=current_user, profile=follow_profile)
-
-#         following.save()
-#     else:
-#         pass
-
-#     return redirect(index)
+    return redirect(single_image, current_image.id)
 
 
-# @login_required(login_url='/accounts/login')
-# def unfollow(request, id):
-#     '''
-#     View function unfollow other users
-#     '''
-#     current_user = request.user
+@login_required(login_url='/accounts/login')
+def follow(request, id):
+    '''
+    View function add profiles of other users to your timeline
+    '''
+    current_user = request.user
 
-#     follow_profile = Profile.objects.get(id=id)
+    follow_profile = Profile.objects.get(id=id)
 
-#     following = Follow.objects.filter(
-#         user=current_user, profile=follow_profile)
-#     # following = Follow(user=current_user, profile=follow_profile)
-#     for item in following:
-#         item.delete()
+    check_if_following = Follow.objects.filter(
+        user=current_user, profile=follow_profile).count()
 
-#     return redirect(index)
+    if check_if_following == 0:
+
+        following = Follow(user=current_user, profile=follow_profile)
+
+        following.save()
+    else:
+        pass
+
+    return redirect(index)
 
 
-# def search_results(request):
+@login_required(login_url='/accounts/login')
+def unfollow(request, id):
+    '''
+    View function unfollow other users
+    '''
+    current_user = request.user
 
-#     if 'grammer' in request.GET and request.GET["grammer"]:
-#         search_term = request.GET.get("grammer")
-#         searched_users = User.objects.filter(username__icontains=search_term)
-#         message = f"{search_term}"
+    follow_profile = Profile.objects.get(id=id)
 
-#         for user in searched_users:
-#             found = Profile.objects.get(user=user.id)
+    following = Follow.objects.filter(
+        user=current_user, profile=follow_profile)
+    # following = Follow(user=current_user, profile=follow_profile)
+    for item in following:
+        item.delete()
 
-#         return render(request, 'searched.html', {"message": message, "users": searched_users, "found": found})
+    return redirect(index)
 
-#     else:
-#         message = "You haven't searched for any term"
-#         return render(request, 'searched.html', {"message": message})
+
+def search_results(request):
+
+    if 'grammer' in request.GET and request.GET["grammer"]:
+        search_term = request.GET.get("grammer")
+        searched_users = User.objects.filter(username__icontains=search_term)
+        message = f"{search_term}"
+
+        for user in searched_users:
+            found = Profile.objects.get(user=user.id)
+
+        return render(request, 'searched.html', {"message": message, "users": searched_users, "found": found})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'searched.html', {"message": message})
 
 
 
