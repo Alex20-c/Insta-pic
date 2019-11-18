@@ -8,31 +8,31 @@ class Tag(models.Model):
     name = models.CharField(max_length=30)
 
 
-# class Profile(models.Model):
-#     profile_photo = models.ImageField(upload_to='profiles/', null=True)
-#     bio = models.TextField(null=True)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Profile(models.Model):
+    profile_photo = models.ImageField(upload_to='profiles/', null=True)
+    bio = models.TextField(null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         '''
-#         Display for profiles in profile table
-#         '''
-#         return self.user.username
+    def __str__(self):
+        '''
+        Display for profiles in profile table
+        '''
+        return self.user.username
 
-#     @classmethod
-#     def get_profiles(cls):
-#         '''
-#         Fucntion that gets all the profiles in the app
-#         Return
-#         '''
-#         profiles = Profile.objects.all()
+    @classmethod
+    def get_profiles(cls):
+        '''
+        Fucntion that gets all the profiles in the app
+        Return
+        '''
+        profiles = Profile.objects.all()
 
-#         return profiles
+        return profiles
 
-#     @classmethod
-#     def search_by_grammer(cls, search_term):
-#         query = cls.objects.filter(bio__icontains=search_term)
-#         return query
+    @classmethod
+    def search_by_grammer(cls, search_term):
+        query = cls.objects.filter(bio__icontains=search_term)
+        return query
 
 
 # class Image(models.Model):
