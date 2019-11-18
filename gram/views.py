@@ -25,38 +25,38 @@ def explore(request):
     return render(request, 'explore.html')
 
 
-# @login_required(login_url='/accounts/login')
-# def timeline(request):
-#     '''
-#     returns timeline html
-#     '''
-#     return render(request, 'timeline.html')
+@login_required(login_url='/accounts/login')
+def timeline(request):
+    '''
+    returns timeline html
+    '''
+    return render(request, 'timeline.html')
 
 
-# @login_required(login_url='/accounts/login')
-# def index(request):
-#     # images = Image.get_images()
-#     current_user = request.user
+@login_required(login_url='/accounts/login')
+def index(request):
+    # images = Image.get_images()
+    current_user = request.user
 
-#     title = 'One piece'
+    title = 'One piece'
 
-#     # user_info = Profile.objects.get(user=current_user.id)
+    # user_info = Profile.objects.get(user=current_user.id)
 
-#     grammers = Profile.get_profiles
+    grammers = Profile.get_profiles
 
-#     following = Follow.get_following(current_user.id)
+    following = Follow.get_following(current_user.id)
 
-#     images = []
-#     for followed in following:
-#         # get profile id for each and use it to find user id
-#         profiles = Profile.objects.filter(id=followed.profile.id)
-#         for profile in profiles:
-#             post = Image.objects.filter(user=profile.user)
+    images = []
+    for followed in following:
+        # get profile id for each and use it to find user id
+        profiles = Profile.objects.filter(id=followed.profile.id)
+        for profile in profiles:
+            post = Image.objects.filter(user=profile.user)
 
-#             for image in post:
-#                 images.append(image)
+            for image in post:
+                images.append(image)
 
-#     return render(request, 'index.html', {"images": images, "title": title, "following": following, "user": current_user, "grammers": grammers})
+    return render(request, 'index.html', {"images": images, "title": title, "following": following, "user": current_user, "grammers": grammers})
 
 
 # @login_required(login_url='/accounts/login')
