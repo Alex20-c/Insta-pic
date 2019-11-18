@@ -1,4 +1,4 @@
- {% extends 'base.html' %} {% load static%}
+{% extends 'base.html' %} {% load static%}
 <!-- Styles block -->
 {% block styles %} {{block.super}}
 <link rel="stylesheet" href="{% static 'css/index.css'%}"> 
@@ -30,6 +30,9 @@
                     <a href="{% url 'Comment' image.id %}">
                         <button type="button" class="btn btn-primary" name="button">Comment</button>
                     </a>
+                    <a href="{% url 'Like' image.id %}">
+                        <button type="button" class="btn btn-primary" name="button">Like</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -40,8 +43,7 @@
 
 <section class="col-md-5 col-sm-12">
     <center>
-        <p style=" margin-left:10px;color:rgb(4, 47, 74); padding-top:10px; margin-right:20px;font-size:25px; font-family: 'Kavivanar', cursive;
-">explore</p>
+        <p style=" margin-left:10px;color:rgb(4, 47, 74); padding-top:10px; margin-right:20px;font-size:25px; font-family: 'Kavivanar', cursive;">explore</p>
     </center>
     {%for profile in grammers %}
     <div class="col-md-4">
