@@ -16,14 +16,14 @@ urlpatterns=[
     url(r'^manage/(\d+)', views.manage_image, name='manageImage'),
     url(r'^comment/(\d+)', views.new_comment, name='Comment'),
     url(r'^single/image/(\d+)', views.single_image, name='singleImage'),
-    # url(r'^follow/(\d+)', views.follow, name="follow"),
-    # url(r'^delete/post/(\d+)', views.delete_post, name="removePost"),
-    # url(r'^unfollow/(\d+)', views.unfollow, name="unfollow"),
-    # url(r'^like/(\d+)', views.like, name="like"),
-    # url(r'^update/profile/', views.create_profile, name="createProfile"),
-    # url(r'^search/', views.search_results, name='search_results'),
-    # url(r'^accounts/', include('registration.backends.simple.urls')),
-    # url(r'^index', views.index, name='timeline'),
+    url(r'^follow/(\d+)', views.follow, name="follow"),
+    url(r'^delete/post/(\d+)', views.delete_post, name="removePost"),
+    url(r'^unfollow/(\d+)', views.unfollow, name="unfollow"),
+    url(r'^like/(\d+)', views.like, name="like"),
+    url(r'^update/profile/', views.create_profile, name="createProfile"),
+    url(r'^search/', views.search_results, name='search_results'),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^index', views.index, name='timeline'),
 
 ]
 
