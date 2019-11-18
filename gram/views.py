@@ -22,7 +22,8 @@ def explore(request):
     '''
     Views the initial profile
     '''
-    return render(request, 'explore.html')
+    images = Image.objects.all()
+    return render(request, 'explore.html', {"images":images})
 
 
 @login_required(login_url='/accounts/login')
