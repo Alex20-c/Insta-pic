@@ -1,12 +1,12 @@
 # insta-clone
 
-### By **Alex Kiprop**.
+### By **Alex Kiprop**. 
 
 
 ## Description
 
 A web applications that allows users to share comment and like photos posted by users
-<a href="https://instme.herokuapp.com/"><img src="/static/images/me.png"></a>
+<a href="https://instme.herokuapp.com/"><img src="/media/photos/me.png"></a>
 
 ## User Stories
 As a user I would like:
