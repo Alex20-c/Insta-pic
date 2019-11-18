@@ -22,7 +22,6 @@ urlpatterns=[
     url(r'^like/(\d+)', views.like, name="like"),
     url(r'^update/profile/', views.create_profile, name="createProfile"),
     url(r'^search/', views.search_results, name='search_results'),
-    url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^index', views.index, name='timeline'),
 
 ]
