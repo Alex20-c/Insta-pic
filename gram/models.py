@@ -59,15 +59,15 @@ class Image(models.Model):
     def __str__(self):
         return self.image_name
 
-#     @classmethod
-#     def get_images(cls):
-#         '''
-#         Method that gets all image posts from the database
-#         Returns:
-#             images : list of image post objects from the database
-#         '''
-#         images = Image.objects.all()
-#         return images
+    @classmethod
+    def get_images(cls):
+        '''
+        Method that gets all image posts from the database
+        Returns:
+            images : list of image post objects from the database
+        '''
+        images = Image.objects.all()
+        return images
 
 
 class Comment(models.Model):
