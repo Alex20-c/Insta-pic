@@ -37,13 +37,12 @@ class Profile(models.Model):
 
 class Image(models.Model):
     image = models.ImageField(upload_to='photos/', null=True)
-    image_name = models.CharField(max_length=30)
+    image_name = models.CharField(max_length=30, null=True)
     image_caption = models.TextField(max_length=100, null=True, blank=True)
-    likes = models.IntegerField(null=True, blank=True)
+    likes = models.IntegerField(default=0)
     date_uploaded = models.DateTimeField(auto_now_add=True, null=True)
-    profile = models.ForeignKey(
-        Profile, null=True, blank=True, on_delete=models.CASCADE)
-    user = models.ForeignKey(User)
+    profile = models.ForeignKey(Profile, null=True)
+    user = models.ForeignKey(User, null=True)
 
     class Meta:
         ordering = ['-date_uploaded']
