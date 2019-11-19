@@ -23,7 +23,6 @@ urlpatterns=[
     url(r'^update/profile/', views.create_profile, name="createProfile"),
     url(r'^search/', views.search_results, name='search_results'),
     url(r'^index', views.index, name='timeline'),
-
 ]
 
 if settings.DEBUG:
